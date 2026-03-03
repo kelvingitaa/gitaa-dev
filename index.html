@@ -2903,17 +2903,16 @@
   <footer>
     <span class="f-logo">gitaa<span style="color:var(--red)">.</span>dev</span>
     <div class="f-links">
-      <a href="#">Twitter</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Instagram</a>
-      <a href="mailto:hello@gitaa.dev">hello@gitaa.dev</a>
+      <a href="https://www.instagram.com/gitaa.dev?igsh=aXdianN0eW45cnFl" target="_blank">Instagram</a>
+      <a href="https://wa.me/254759165220" target="_blank">WhatsApp</a>
+      <a href="mailto:gitaalenana@gmail.com">gitaalenana@gmail.com</a>
     </div>
     <span class="f-copy">© 2026 gitaa.dev</span>
   </footer>
 
   <!-- STICKY WHATSAPP -->
   <a class="wa-btn"
-    href="https://wa.me/254700000000?text=Hi%20gitaa.dev%2C%20I%27d%20like%20to%20discuss%20a%20website%20project"
+    href="https://wa.me/254759165220?text=Hi%20gitaa.dev%2C%20I%27d%20like%20to%20discuss%20a%20website%20project"
     target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <span class="wa-tooltip">Chat with us</span>
     <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
@@ -3034,22 +3033,27 @@
       const btn = document.getElementById('formSubmitBtn');
       btn.textContent = 'Sending...';
       btn.disabled = true;
-      /* Collect form data */
       const data = new FormData(form);
-      const info = {};
-      data.forEach((v, k) => info[k] = v);
-      /* TODO: Replace with your email service endpoint (e.g. Web3Forms, Formspree, EmailJS)
-         Example with Web3Forms:
-         fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:'YOUR_KEY',...info})})
-      */
-      /* For now, simulate success after a short delay */
-      setTimeout(() => {
-        document.getElementById('formCard').classList.add('hide');
-        document.getElementById('formSuccess').classList.add('show');
-        btn.textContent = 'Send project details →';
-        btn.disabled = false;
-        form.reset();
-      }, 800);
+      data.append('_subject', 'New Project Enquiry from gitaa.dev');
+      data.append('_captcha', 'false');
+      data.append('_template', 'table');
+      fetch('https://formsubmit.co/ajax/gitaalenana@gmail.com', {
+        method: 'POST',
+        body: data
+      })
+        .then(res => res.json())
+        .then(response => {
+          document.getElementById('formCard').classList.add('hide');
+          document.getElementById('formSuccess').classList.add('show');
+          btn.textContent = 'Send project details \u2192';
+          btn.disabled = false;
+          form.reset();
+        })
+        .catch(err => {
+          alert('Something went wrong. Please try again or email us directly at gitaalenana@gmail.com');
+          btn.textContent = 'Send project details \u2192';
+          btn.disabled = false;
+        });
       return false;
     }
   </script>
